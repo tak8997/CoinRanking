@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="view" type="com.github.tak8997.coinranking.ui.CoinsActivity"/>
-        <variable name="viewModel" type="com.github.tak8997.coinranking.ui.CoinsViewModel"/>
+        <variable name="view" type="com.github.tak8997.coinranking.ui.coins.CoinsActivity"/>
+        <variable name="viewModel" type="com.github.tak8997.coinranking.ui.coins.CoinsViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.CoinsActivity">
+            tools:context=".ui.coins.CoinsActivity">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/coinsRecycler"

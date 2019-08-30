@@ -1,4 +1,4 @@
-package com.github.tak8997.coinranking.ui
+package com.github.tak8997.coinranking.ui.coins
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.github.tak8997.coinranking.BaseActivity
 import com.github.tak8997.coinranking.R
 import com.github.tak8997.coinranking.databinding.ActivityCoinsBinding
 import com.github.tak8997.coinranking.ui.coindetail.CoinDetailActivity
-import com.github.tak8997.coinranking.ui.item.CoinAdapter
+import com.github.tak8997.coinranking.ui.coins.item.CoinAdapter
 import kotlinx.android.synthetic.main.activity_coins.*
 
 class CoinsActivity : BaseActivity<ActivityCoinsBinding, CoinsViewModel>(), CoinAdapter.OnItemClickListener {

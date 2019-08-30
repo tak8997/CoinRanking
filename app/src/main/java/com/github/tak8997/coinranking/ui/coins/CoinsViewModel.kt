@@ -1,4 +1,4 @@
-package com.github.tak8997.coinranking.ui
+package com.github.tak8997.coinranking.ui.coins
 
 import android.app.Activity
 import android.content.Intent

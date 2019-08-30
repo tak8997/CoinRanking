@@ -24,6 +24,9 @@ class CoinsActivity : BaseActivity<ActivityCoinsBinding, CoinsViewModel>(), Coin
         viewModel.fetchCoins()
         viewModel.run {
             pages.observe(this@CoinsActivity, Observer (coinAdapter::submitList))
+            returnedItem.observe(this@CoinsActivity, Observer {
+                coinAdapter.changeState(it)
+            })
             networkErrors.observe(this@CoinsActivity, Observer {
                 Toast.makeText(this@CoinsActivity, it.msg, Toast.LENGTH_SHORT).show()
             })
@@ -34,9 +37,14 @@ class CoinsActivity : BaseActivity<ActivityCoinsBinding, CoinsViewModel>(), Coin
     }
 
     override fun itemClicked(id: Int?) {
-        startActivity(Intent(this, CoinDetailActivity::class.java).apply {
+        startActivityForResult(Intent(this, CoinDetailActivity::class.java).apply {
             putExtra(DEFAULT_PARAM, id)
-        })
+        }, REQUEST_DETAIL_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        viewModel.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun setupListener() {

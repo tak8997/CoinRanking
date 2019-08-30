@@ -1,6 +1,7 @@
 package com.github.tak8997.coinranking.util.databinding
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -26,6 +27,7 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:selected")
     fun selected(view: View, selected: Boolean) {
+        Log.d("MY_LOG", selected.toString())
         view.isSelected = selected
     }
 

@@ -1,5 +1,8 @@
 package com.github.tak8997.coinranking.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
+
 
 data class CoinBaseResponse(
     val status: String,
@@ -32,14 +35,54 @@ data class Base(
 
 data class Coin(
     val id: Int,
-    val symbol: String,
-    val name: String,
-    val description: String,
-    val iconUrl: String,
+    val symbol: String?,
+    val name: String?,
+    val description: String?,
+    val iconUrl: String?,
     val volume: Long,
     val price: Float,
-    val favorite: Boolean,
+    var favorite: Boolean,
     val change: Float,
-    val history: List<String>
-)
+    val history: List<String>?
+): Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readLong(),
+        parcel.readFloat(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readFloat(),
+        parcel.createStringArrayList()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(symbol)
+        parcel.writeString(name)
+        parcel.writeString(description)
+        parcel.writeString(iconUrl)
+        parcel.writeLong(volume)
+        parcel.writeFloat(price)
+        parcel.writeByte(if (favorite) 1 else 0)
+        parcel.writeFloat(change)
+        parcel.writeStringList(history)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Coin> {
+        override fun createFromParcel(parcel: Parcel): Coin {
+            return Coin(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Coin?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 

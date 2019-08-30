@@ -20,6 +20,18 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+        <ImageView
+                android:id="@+id/favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:background="@drawable/selector_favorite"
+                android:onClick="@{viewModel::onClick}"
+                android:selected="@{viewModel.favorite}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
         <TextView
                 android:id="@+id/description"
                 android:layout_width="0dp"

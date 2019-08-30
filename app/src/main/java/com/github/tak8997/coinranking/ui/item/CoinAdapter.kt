@@ -48,4 +48,16 @@ class CoinAdapter: PagedListAdapter<Coin, CoinViewHolder>(object : DiffUtil.Item
     fun setOnItemListener(listener: OnItemClickListener) {
         this.listener = listener
     }
+
+    fun changeState(item: Coin?) {
+        if (item?.favorite == true) {
+            currentList?.forEachIndexed { index, coin ->
+                if (coin.id == item.id) {
+                    coin.favorite = true
+                    notifyDataSetChanged()
+                    return
+                }
+            }
+        }
+    }
 }

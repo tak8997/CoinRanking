@@ -16,7 +16,7 @@ import javax.inject.Singleton
 interface AppNetworkModule {
 
     companion object {
-        const val BASE_URL = "https://dapi.kakao.com/v2/"
+        const val BASE_URL = "https://api.coinranking.com/v1/public/"
     }
 
     @Module

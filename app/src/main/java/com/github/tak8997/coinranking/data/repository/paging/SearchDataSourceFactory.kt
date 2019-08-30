@@ -7,7 +7,6 @@ import com.github.tak8997.coinranking.data.model.Coin
 import io.reactivex.disposables.CompositeDisposable
 
 class SearchDataSourceFactory(
-    private val keyword: String,
     private val apiService: ApiService,
     private val disposables: CompositeDisposable
 ) : DataSource.Factory<Int, Coin>() {
@@ -15,7 +14,7 @@ class SearchDataSourceFactory(
     val sourceLiveData = MutableLiveData<SearchDataSource>()
 
     override fun create(): DataSource<Int, Coin> {
-        val source = SearchDataSource(keyword, apiService, disposables)
+        val source = SearchDataSource(apiService, disposables)
         sourceLiveData.postValue(source)
         return source
     }

@@ -6,13 +6,15 @@ import androidx.paging.PagedList
 import com.github.tak8997.coinranking.data.ApiService
 import com.github.tak8997.coinranking.data.model.Coin
 import com.github.tak8997.coinranking.data.repository.paging.SearchDataSourceFactory
+import com.github.tak8997.coinranking.util.SchedulerProvider
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class AppDataRepository @Inject constructor(
     private val apiService: ApiService,
-    private val disposables: CompositeDisposable
+    private val disposables: CompositeDisposable,
+    private val scheduler: SchedulerProvider
 ): AppRepository {
 
     override fun fetchCoins(): Single<Listing<Coin>> {
@@ -32,5 +34,12 @@ class AppDataRepository @Inject constructor(
             LivePagedListBuilder(dataSourceFactory, config).build(),
             networkError
         ))
+    }
+
+    override fun fetchCoin(id: Int): Single<Coin> {
+        return apiService.fetchCoin(id)
+            .map { it.data.coin }
+            .subscribeOn(scheduler.io())
+            .observeOn(scheduler.ui())
     }
 }

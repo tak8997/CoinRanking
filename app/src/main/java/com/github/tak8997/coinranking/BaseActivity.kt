@@ -20,6 +20,10 @@ import javax.inject.Inject
 
 abstract class BaseActivity<VB : ViewDataBinding, VM : ViewModel>: HasSupportFragmentInjector, AppCompatActivity() {
 
+    companion object {
+        const val DEFAULT_PARAM = "DEFAULT_PARAM"
+    }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: VB

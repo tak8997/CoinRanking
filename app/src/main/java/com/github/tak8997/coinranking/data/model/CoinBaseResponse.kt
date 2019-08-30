@@ -9,6 +9,7 @@ data class CoinBaseResponse(
 data class Data(
     val stats: Stats,
     val base: Base,
+    val coin: Coin,
     val coins: MutableList<Coin>
 )
 
@@ -33,8 +34,12 @@ data class Coin(
     val id: Int,
     val symbol: String,
     val name: String,
+    val description: String,
     val iconUrl: String,
+    val volume: Long,
     val price: Float,
-    val favorite: Boolean
+    val favorite: Boolean,
+    val change: Float,
+    val history: List<String>
 )
 

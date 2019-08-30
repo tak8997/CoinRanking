@@ -1,6 +1,5 @@
 package com.github.tak8997.coinranking.data.repository.paging
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.github.tak8997.coinranking.data.ApiService
@@ -29,7 +28,6 @@ class SearchDataSource(
         apiService
             .fetchCoins(params.key, params.requestedLoadSize)
             .subscribe({
-                Log.d("MY_LOG", params.key.toString() + " , " + params.requestedLoadSize)
                 callback.onResult(it.data.coins, params.key + 1)
             }, { networkError.postValue(NetworkState.error(it.message)) })
             .addTo(disposables)

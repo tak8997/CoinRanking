@@ -39,6 +39,7 @@ data class Coin(
     val name: String?,
     val description: String?,
     val iconUrl: String?,
+    val websiteUrl: String?,
     val volume: Long,
     val price: Float,
     var favorite: Boolean,
@@ -47,6 +48,7 @@ data class Coin(
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -64,6 +66,7 @@ data class Coin(
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeString(iconUrl)
+        parcel.writeString(websiteUrl)
         parcel.writeLong(volume)
         parcel.writeFloat(price)
         parcel.writeByte(if (favorite) 1 else 0)

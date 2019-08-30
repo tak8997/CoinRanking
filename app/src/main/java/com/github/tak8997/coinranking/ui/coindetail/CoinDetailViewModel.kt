@@ -17,6 +17,7 @@ class CoinDetailViewModel @Inject constructor(
     val result = MutableLiveData<Coin>()
     val networkState = MutableLiveData<NetworkState>()
     val favorite = MutableLiveData<Boolean>()
+    val websiteUrlVisible = MutableLiveData(false)
 
     fun fetchCoin(id: Int) {
         repository
@@ -32,6 +33,7 @@ class CoinDetailViewModel @Inject constructor(
                 result.value?.favorite = !view.isSelected
                 favorite.value = !view.isSelected
             }
+            R.id.icon -> websiteUrlVisible.value = !view.isSelected
         }
     }
 }

@@ -8,7 +8,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.github.tak8997.coinranking.util.SchedulerProvider
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -22,6 +21,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : ViewModel>: HasSupportFra
 
     companion object {
         const val DEFAULT_PARAM = "DEFAULT_PARAM"
+        const val REQUEST_DETAIL_CODE = 1000
     }
 
     @Inject
@@ -49,7 +49,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : ViewModel>: HasSupportFra
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getModelClass())
+        viewModel = ViewModelProvider(this, viewModelFactory).get(getModelClass())
 
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         binding.lifecycleOwner = this

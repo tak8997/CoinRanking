@@ -1,5 +1,7 @@
 package com.github.tak8997.coinranking.ui.coindetail
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -45,6 +47,13 @@ class CoinDetailActivity : BaseActivity<ActivityCoinDetailBinding, CoinDetailVie
         }
 
         setupRecycler()
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_OK, Intent().apply {
+            putExtra(DEFAULT_PARAM, viewModel.result.value)
+        })
+        finish()
     }
 
     private fun setupRecycler() {

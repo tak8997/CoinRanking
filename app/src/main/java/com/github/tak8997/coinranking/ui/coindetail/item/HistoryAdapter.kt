@@ -21,7 +21,9 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryViewHolder>() {
         holder.bind(items[position])
     }
 
-    fun addItems(histories: List<String>) {
+    fun addItems(histories: List<String>?) {
+        checkNotNull(histories)
+
         items.clear()
         items.addAll(histories)
         notifyDataSetChanged()

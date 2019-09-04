@@ -1,11 +1,11 @@
 package com.github.tak8997.coinranking.lib
 
 import com.bumptech.glide.load.Options
-import com.caverock.androidsvg.SVGParseException
-import com.caverock.androidsvg.SVG
-import com.bumptech.glide.load.resource.SimpleResource
 import com.bumptech.glide.load.ResourceDecoder
 import com.bumptech.glide.load.engine.Resource
+import com.bumptech.glide.load.resource.SimpleResource
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGParseException
 import java.io.IOException
 import java.io.InputStream
 

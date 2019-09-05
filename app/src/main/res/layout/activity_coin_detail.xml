@@ -2,8 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="item" type="com.github.tak8997.coinranking.data.model.Coin"/>
-
+        <variable name="favoriteState" type="Boolean"/>
         <variable name="view" type="com.github.tak8997.coinranking.ui.coindetail.CoinDetailActivity"/>
         <variable name="viewModel" type="com.github.tak8997.coinranking.ui.coindetail.CoinDetailViewModel"/>
     </data>
@@ -18,6 +17,7 @@
                 android:layout_margin="16dp"
                 android:onClick="@{viewModel::onClick}"
                 android:selected="@{viewModel.websiteUrlVisible}"
+                app:srcCompat="@{viewModel.result.iconUrl}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -30,7 +30,7 @@
                 android:padding="6dp"
                 android:background="@drawable/selector_favorite"
                 android:onClick="@{viewModel::onClick}"
-                android:selected="@{viewModel.favorite}"
+                android:selected="@{viewModel.result.favorite_}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
@@ -47,6 +47,7 @@
                 android:id="@+id/description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@{viewModel.result.description}"
                 tools:text="description이다요"
                 app:layout_constraintLeft_toLeftOf="@+id/websiteUrl"
                 app:layout_constraintRight_toRightOf="@id/icon"
@@ -56,6 +57,7 @@
                 android:id="@+id/volume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{String.valueOf(viewModel.result.volume)}"
                 android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="@+id/description"
                 app:layout_constraintTop_toBottomOf="@+id/description"/>
@@ -64,15 +66,16 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text='@{String.format("%.2f", viewModel.result.price)}'
                 android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="@+id/volume"
-                app:layout_constraintRight_toRightOf="@+id/volume"
                 app:layout_constraintTop_toBottomOf="@+id/volume"/>
 
         <TextView
                 android:id="@+id/change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{String.valueOf(viewModel.result.change)}"
                 android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="@+id/price"
                 app:layout_constraintTop_toBottomOf="@+id/price"/>
@@ -80,11 +83,11 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/historyRecycler"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_height="0dp"
+                android:layout_margin="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/change"/>
+                app:layout_constraintTop_toBottomOf="@+id/change"
+                app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -51,7 +51,7 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(item.price)}"
+                android:text='@{String.format("%.2f", item.price)}'
                 app:layout_constraintLeft_toLeftOf="@id/name"
                 app:layout_constraintTop_toBottomOf="@+id/symbol"
                 app:layout_constraintBottom_toBottomOf="@+id/icon"

@@ -7,6 +7,10 @@ import com.github.tak8997.coinranking.databinding.ItemHistoryBinding
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryViewHolder>() {
 
+    companion object {
+        private const val LIMIT_COUNT = 6
+    }
+
     private val items = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
@@ -25,7 +29,11 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryViewHolder>() {
         checkNotNull(histories)
 
         items.clear()
-        items.addAll(histories)
+        histories.forEachIndexed { index, history ->
+            if (index > LIMIT_COUNT) { return }
+            items.add(history)
+        }
+
         notifyDataSetChanged()
     }
 }

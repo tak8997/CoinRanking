@@ -16,23 +16,18 @@ class CoinDetailViewModel @Inject constructor(
 
     val result = MutableLiveData<Coin>()
     val networkState = MutableLiveData<NetworkState>()
-    val favorite = MutableLiveData<Boolean>()
     val websiteUrlVisible = MutableLiveData(false)
 
     fun fetchCoin(id: Int) {
         repository
             .fetchCoin(id)
-            .subscribe(result::setValue) { networkState.value = NetworkState.error(it.message)
-            it.printStackTrace()}
+            .subscribe(result::setValue) { networkState.value = NetworkState.error(it.message) }
             .addTo(disposables)
     }
 
     fun onClick(view: View) {
         when(view.id) {
-            R.id.favorite -> {
-                result.value?.favorite = !view.isSelected
-                favorite.value = !view.isSelected
-            }
+            R.id.favorite -> result.value = result.value?.apply { favorite_ = !view.isSelected }
             R.id.icon -> websiteUrlVisible.value = !view.isSelected
         }
     }

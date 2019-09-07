@@ -13,7 +13,7 @@ import com.github.tak8997.coinranking.ui.coins.CoinsViewModel
 import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -62,11 +62,32 @@ class CoinsViewModelTest {
         verify(pagesObserver).onChanged(pagedList)
     }
 
+    @Test
+    fun failToFetchCoins() {
+        val listing = Listing(
+            MutableLiveData(mockPagedList(TestUtil.getCoins())),
+            MutableLiveData(NetworkState(Status.FAILED, "error"))
+        )
+
+        `when`(repository.fetchCoins()).thenReturn(Single.just(listing))
+        coinsViewModel.fetchCoins()
+
+        val networkState = getNetworkState(listing)
+
+        assertThat(networkState, `is`(NetworkState.error("error")))
+    }
+
     private fun getPagedList(listing: Listing<Coin>): PagedList<Coin> {
         val observer = LoggingObserver<PagedList<Coin>>()
         listing.pages.observeForever(observer)
         assertThat(observer.value, `is`(notNullValue()))
         return observer.value!!
+    }
+
+    private fun getNetworkState(listing: Listing<Coin>) : NetworkState? {
+        val networkObserver = LoggingObserver<NetworkState>()
+        listing.networkState.observeForever(networkObserver)
+        return networkObserver.value
     }
 
     private fun <T> mockPagedList(list: List<T>): PagedList<T> {

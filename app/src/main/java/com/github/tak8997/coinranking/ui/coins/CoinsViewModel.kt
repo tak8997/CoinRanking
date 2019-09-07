@@ -7,13 +7,13 @@ import androidx.lifecycle.Transformations.switchMap
 import com.github.tak8997.coinranking.BaseActivity
 import com.github.tak8997.coinranking.BaseViewModel
 import com.github.tak8997.coinranking.data.model.Coin
-import com.github.tak8997.coinranking.data.repository.AppDataRepository
+import com.github.tak8997.coinranking.data.repository.AppRepository
 import com.github.tak8997.coinranking.data.repository.Listing
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class CoinsViewModel @Inject constructor(
-    private val repository: AppDataRepository
+    private val repository: AppRepository
 ): BaseViewModel() {
 
     private val pageResult =  MutableLiveData<Listing<Coin>>()

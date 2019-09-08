@@ -36,9 +36,10 @@ class CoinsActivity : BaseActivity<ActivityCoinsBinding, CoinsViewModel>(), Coin
         setupRecycler()
     }
 
-    override fun itemClicked(id: Int?) {
+    override fun itemClicked(id: Int?, favorite: Boolean?) {
         startActivityForResult(Intent(this, CoinDetailActivity::class.java).apply {
             putExtra(DEFAULT_PARAM, id)
+            putExtra(DEFAULT_PARMA2, favorite)
         }, REQUEST_DETAIL_CODE)
     }
 

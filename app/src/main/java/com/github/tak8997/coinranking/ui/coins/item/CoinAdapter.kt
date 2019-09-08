@@ -21,7 +21,7 @@ class CoinAdapter: PagedListAdapter<Coin, CoinViewHolder>(object : DiffUtil.Item
 }) {
 
     interface OnItemClickListener {
-        fun itemClicked(id: Int?)
+        fun itemClicked(id: Int?, favorite: Boolean? = false)
     }
 
     private var listener: OnItemClickListener? = null
@@ -34,7 +34,8 @@ class CoinAdapter: PagedListAdapter<Coin, CoinViewHolder>(object : DiffUtil.Item
             val adapterPosition = viewHolder.adapterPosition
 
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                listener?.itemClicked(getItem(adapterPosition)?.id)
+                val item = getItem(adapterPosition)
+                listener?.itemClicked(item?.id, item?.favorite)
             }
         }
 

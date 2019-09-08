@@ -20,4 +20,20 @@ object TestUtil {
             )
         }
     }
+
+    fun getCoin(testId: Int): Coin {
+        return Coin(
+            testId,
+            "",
+            "",
+            "",
+            "",
+            "",
+            10,
+            10.0F,
+            false,
+            0F,
+            mutableListOf()
+        )
+    }
 }

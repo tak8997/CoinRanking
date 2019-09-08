@@ -3,8 +3,6 @@ package com.github.tak8997.coinranking.data.model
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import androidx.databinding.library.baseAdapters.BR
 
 
 data class CoinBaseResponse(
@@ -49,13 +47,6 @@ data class Coin(
     val change: Float,
     val history: List<String>?
 ): Parcelable, BaseObservable() {
-
-    @get:Bindable var favorite_ = false
-    set(value) {
-        favorite = value
-        field = value
-        notifyPropertyChanged(BR.favorite_)
-    }
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

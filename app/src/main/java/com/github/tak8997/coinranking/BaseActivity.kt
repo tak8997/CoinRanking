@@ -21,6 +21,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : ViewModel>: HasSupportFra
 
     companion object {
         const val DEFAULT_PARAM = "DEFAULT_PARAM"
+        const val DEFAULT_PARMA2 = "DEFAULT_PARAM2"
         const val REQUEST_DETAIL_CODE = 1000
     }
 

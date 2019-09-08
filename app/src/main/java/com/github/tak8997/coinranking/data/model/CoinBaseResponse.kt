@@ -48,13 +48,6 @@ data class Coin(
     val history: List<String>?
 ): Parcelable, BaseObservable() {
 
-//    @get:Bindable var favorite_ = false
-//    set(value) {
-//        favorite = value
-//        field = value
-//        notifyPropertyChanged(BR.favorite_)
-//    }
-
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),

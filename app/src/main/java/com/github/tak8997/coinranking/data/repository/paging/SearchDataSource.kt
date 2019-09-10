@@ -17,9 +17,9 @@ class SearchDataSource(
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Coin>) {
         apiService
-            .fetchCoins(1, params.requestedLoadSize)
+            .fetchCoins(0, params.requestedLoadSize)
             .subscribe({
-                callback.onResult(it.data.coins, null, 2)
+                callback.onResult(it.data.coins, 0, 10)
             }, { networkError.postValue(NetworkState.error(it.message)) })
             .addTo(disposables)
     }
@@ -28,7 +28,7 @@ class SearchDataSource(
         apiService
             .fetchCoins(params.key, params.requestedLoadSize)
             .subscribe({
-                callback.onResult(it.data.coins, params.key + 1)
+                callback.onResult(it.data.coins, params.key + 10)
             }, { networkError.postValue(NetworkState.error(it.message)) })
             .addTo(disposables)
     }

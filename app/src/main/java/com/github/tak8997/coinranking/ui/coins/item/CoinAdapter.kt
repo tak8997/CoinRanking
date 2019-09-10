@@ -46,18 +46,25 @@ class CoinAdapter: PagedListAdapter<Coin, CoinViewHolder>(object : DiffUtil.Item
         holder.bind(getItem(position))
     }
 
+    override fun onBindViewHolder(holder: CoinViewHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+        } else {
+            val favorite = payloads[0] as? Boolean
+            holder.binding.favorite.isSelected = favorite == true
+        }
+    }
+
     fun setOnItemListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
     fun changeState(item: Coin?) {
-        if (item?.favorite == true) {
-            currentList?.forEachIndexed { index, coin ->
-                if (coin.id == item.id) {
-                    coin.favorite = true
-                    notifyDataSetChanged()
-                    return
-                }
+        currentList?.forEachIndexed { index, coin ->
+            if (coin.id == item?.id) {
+                coin.favorite = item.favorite
+                notifyItemChanged(index, item.favorite)
+                return
             }
         }
     }

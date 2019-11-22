@@ -27,9 +27,6 @@ class CoinsActivity : BaseActivity<ActivityCoinsBinding, CoinsViewModel>(), Coin
             returnedItem.observe(this@CoinsActivity, Observer {
                 coinAdapter.changeState(it)
             })
-            networkErrors.observe(this@CoinsActivity, Observer {
-                Toast.makeText(this@CoinsActivity, it.msg, Toast.LENGTH_SHORT).show()
-            })
         }
 
         setupListener()

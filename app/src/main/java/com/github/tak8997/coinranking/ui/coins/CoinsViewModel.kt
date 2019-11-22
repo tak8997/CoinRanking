@@ -9,23 +9,20 @@ import com.github.tak8997.coinranking.BaseViewModel
 import com.github.tak8997.coinranking.data.model.Coin
 import com.github.tak8997.coinranking.data.repository.AppRepository
 import com.github.tak8997.coinranking.data.repository.Listing
-import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class CoinsViewModel @Inject constructor(
     private val repository: AppRepository
 ): BaseViewModel() {
 
-    private val pageResult =  MutableLiveData<Listing<Coin>>()
+    private val repoResult = MutableLiveData<Listing<Coin>>(repository.fetchCoins())
 
-    val pages = switchMap(pageResult) { it.pages }
-    val networkErrors = switchMap(pageResult) { it.networkState }
+    val pages = switchMap(repoResult) { it.pages }
+    val networkState = switchMap(repoResult) { it.networkState }
     val returnedItem = MutableLiveData<Coin>()
 
     fun fetchCoins() {
-        repository.fetchCoins()
-            .subscribe(pageResult::postValue)
-            .addTo(disposables)
+        repoResult.value?.refresh?.invoke()
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

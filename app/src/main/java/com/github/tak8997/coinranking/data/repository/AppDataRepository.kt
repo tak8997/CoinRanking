@@ -17,7 +17,7 @@ class AppDataRepository @Inject constructor(
     private val scheduler: SchedulerProvider
 ): AppRepository {
 
-    override fun fetchCoins(): Single<Listing<Coin>> {
+    override fun fetchCoins(): Listing<Coin> {
         val dataSourceFactory = SearchDataSourceFactory(apiService, disposables)
 
         val config = PagedList.Config.Builder()
@@ -26,14 +26,15 @@ class AppDataRepository @Inject constructor(
             .setEnablePlaceholders(false)
             .build()
 
-        val networkError = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
-            it.networkError
+        val networkState = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
+            it.networkState
         }
 
-        return Single.just(Listing(
-            LivePagedListBuilder(dataSourceFactory, config).build(),
-            networkError
-        ))
+        return Listing(
+            pages = LivePagedListBuilder(dataSourceFactory, config).build(),
+            networkState = networkState,
+            refresh = { dataSourceFactory.sourceLiveData.value?.invalidate() }
+        )
     }
 
     override fun fetchCoin(id: Int): Single<Coin> {

@@ -22,7 +22,7 @@ class CoinDetailViewModel @Inject constructor(
 //            .subscribe(result::setValue) { networkState.value = NetworkState.error(it.message) }
 //            .addTo(disposables)
     }
-
+//test
     fun onIconClicked(selected: Boolean) {
         websiteUrlVisible.value = selected
     }

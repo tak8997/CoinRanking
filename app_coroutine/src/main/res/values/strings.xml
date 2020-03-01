@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">app_coroutine</string>
+
+    <string name="web_desc">웹싸이트 주소 : %1$s</string>
+    <string name="desc">설명 : %1$s</string>
+    <string name="volume">양 : %1$s</string>
+    <string name="price">가격 : %1$s</string>
+    <string name="change">변화랑 : %1$s</string>
+    <string name="previous_prices">이전 가격들</string>
 </resources>

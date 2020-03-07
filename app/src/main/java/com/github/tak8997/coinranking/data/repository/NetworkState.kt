@@ -1,7 +1,7 @@
 package com.github.tak8997.coinranking.data.repository
 
 enum class Status {
-    RUNNING,
+    LOADING,
     SUCCESS,
     FAILED
 }
@@ -12,6 +12,9 @@ data class NetworkState constructor(
 ) {
 
     companion object {
+        val LOADING = NetworkState(Status.LOADING)
+        val LOADED = NetworkState(Status.SUCCESS)
+        val FAILED = NetworkState(Status.FAILED)
         fun error(msg: String?) = NetworkState(Status.FAILED, msg)
     }
 }
